@@ -1,5 +1,4 @@
 import os
-from app.settings import BASE_DIR
 
 
 class BaseConfig(object):
