@@ -1,10 +1,10 @@
 import os
-from app.settings import BASE_DIR
 
 
 class BaseConfig(object):
     TESTING = False
     DEBUG = False
+    SECRET_KEY = os.urandom(24)
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
