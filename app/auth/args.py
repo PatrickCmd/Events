@@ -10,3 +10,8 @@ user_reg_args = {
     'gender': fields.Str(required=True),
     'date_of_birth': fields.Str()
 }
+
+login_args = {
+    'email': fields.Str(required=True),
+    'password': fields.Str(required=True, validate=validate.Length(6))
+}

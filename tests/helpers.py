@@ -17,3 +17,12 @@ class RegisterLogin(BaseTestCase):
         })
         return self.client.post('/auth/register', data=user,
                                 content_type='application/json')
+
+    # helper function to login user
+    def login_user(self, email, password):
+        user = json.dumps({
+            'email': email,
+            'password': password
+        })
+        return self.client.post('/auth/login', data=user,
+                                content_type='application/json')
