@@ -17,17 +17,33 @@ class UserRegistrationView(Resource):
         data = request.json
         if name_has_numbers(data):
             response = {
-                "messages": "Name field cannot contain numbers"
+                "messages": {
+                    "errors": {
+                        "name:": [
+                            "Name field cannot contain numbers"
+                        ]
+                    }
+                }
             }
             return make_response(jsonify(response), 400)
         if is_valid(data['first_name']) or is_valid(data['last_name']):
             response = {
-                "messages": "Name contains special characters"
+                "messages": {
+                    "errors": {
+                        "name": [
+                            "Name contains special characters"
+                        ]
+                    }
+                }
             }
             return make_response(jsonify(response), 400)
         if not validate_email(strip_clean(data['email'])):
             response = {
-                "messages": "Invalid email format!"
+                "messages": {
+                    "email": [
+                        "Invalid email format!"
+                    ]
+                }
             }
             return make_response(jsonify(response), 400)
         user = User.query.filter_by(email=strip_clean(data['email'])).first()
@@ -51,13 +67,23 @@ class UserRegistrationView(Resource):
                 strip_clean(data['last_name'])
             )
             response = {
-                "messages": "User account created",
-                "token": token
+                "messages": {
+                    "message": [
+                        "User account created"
+                    ],
+                    "token": [token]
+                }
             }
             return make_response(jsonify(response), 201)
         else:
             response = {
-                "messages": "User with that email already exists"
+                "messages": {
+                    "errors": {
+                        "user": [
+                            "User with that email already exists"
+                        ]
+                    }
+                }
             }
             return make_response(jsonify(response), 409)
 
@@ -69,7 +95,11 @@ class UserLoginView(Resource):
         data = request.json
         if not validate_email(strip_clean(data['email'])):
             response = {
-                "messages": "Invalid email format!"
+                "messages": {
+                    "email": [
+                        "Invalid email format!"
+                    ]
+                }
             }
             return make_response(jsonify(response), 400)
         user = User.query.filter_by(
@@ -81,17 +111,33 @@ class UserLoginView(Resource):
                     user.id, user.email, user.first_name, user.last_name
                 )
                 response = {
-                    "messages": "Successfully logged in",
-                    "token": token
+                    "messages": {
+                        "message": [
+                            "Successfully logged in"
+                        ],
+                        "token": [token]
+                    }
                 }
                 return make_response(jsonify(response), 200)
             else:
                 response = {
-                    "messages": "Wrong password, try again!",
+                    "messages": {
+                        "errors": {
+                            "password": [
+                                "Wrong password, try again!"
+                            ]
+                        }
+                    },
                 }
                 return make_response(jsonify(response), 401)
         else:
             response = {
-                    "messages": "User does not exist, please register!",
+                    "messages": {
+                        "errors": {
+                            "user": [
+                                "User does not exist, please register!"
+                            ]
+                        }
+                    },
                 }
             return make_response(jsonify(response), 401)
