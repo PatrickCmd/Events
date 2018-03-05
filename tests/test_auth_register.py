@@ -14,6 +14,16 @@ class TestAuthUserRegistration(RegisterLogin):
             )
             self.assertEqual(response.status_code, 201)
             self.assertIn("User account created", str(response.data))
+    
+    def test_user_registration_with_invalid_email(self):
+        """Test for user registration with invalid email format"""
+        with self.client:
+            response = self.register_user(
+                "example.mailgmail.com", "password",
+                "firstname", "lastname", "Nairobi", "Male"
+            )
+            self.assertEqual(response.status_code, 400)
+            self.assertIn("Invalid email format!", str(response.data))
 
     def test_already_registered_user(self):
         """Test for user registration with already registered email"""
