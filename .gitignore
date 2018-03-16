@@ -4,6 +4,7 @@ __pycache__/
 venv
 virtualenv
 htmlcov
+cover
 .cache
 .coverage
 migrations/
