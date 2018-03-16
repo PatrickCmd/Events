@@ -6,6 +6,7 @@ from flask_migrate import Migrate, MigrateCommand
 from app.config import app_config
 from app import app, db
 from app.auth import models
+from app.events import models
 
 config_name = os.environ.get('ENVIRONMENT_SETTINGS', 'development')
 app.config.from_object(app_config.get(config_name))
