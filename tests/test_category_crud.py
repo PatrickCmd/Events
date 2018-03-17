@@ -25,7 +25,7 @@ class TestCategoryCrud(CreateCategoryEvents):
             self.assertEqual(response.status_code, 201)
             self.assertIn("New category successfully created",
                           str(response.data))
-    
+
     def test_category_creation_which_exists(self):
         '''Test Category creation which already exists'''
         with self.client:
@@ -47,7 +47,7 @@ class TestCategoryCrud(CreateCategoryEvents):
             self.assertEqual(response.status_code, 409)
             self.assertIn("Category already exists",
                           str(response.data))
-    
+
     def test_category_creation_which_empty_name(self):
         '''Test Category creation with empty name string'''
         with self.client:
@@ -67,7 +67,7 @@ class TestCategoryCrud(CreateCategoryEvents):
             self.assertEqual(response.status_code, 422)
             self.assertIn("Shorter than minimum length 3",
                           str(response.data))
-    
+
     def test_categories_retrieval(self):
         '''Test retrieving of existing categories'''
         with self.client:
@@ -91,7 +91,7 @@ class TestCategoryCrud(CreateCategoryEvents):
             self.assertEqual(response.status_code, 200)
             self.assertIn("Technology", str(response.data))
             self.assertIn("Sports", str(response.data))
-    
+
     def test_category_retrieval(self):
         '''Test retrieving of single category'''
         with self.client:
@@ -115,7 +115,7 @@ class TestCategoryCrud(CreateCategoryEvents):
             self.assertEqual(response.status_code, 200)
             self.assertIn("Technology", str(response.data))
             self.assertNotIn("Sports", str(response.data))
-    
+
     def test_category_retrieval_which_doesnot_exist(self):
         '''Test retrieving of single category which doesnot exist'''
         with self.client:

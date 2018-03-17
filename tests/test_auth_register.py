@@ -14,7 +14,7 @@ class TestAuthUserRegistration(RegisterLogin):
             )
             self.assertEqual(response.status_code, 201)
             self.assertIn("User account created", str(response.data))
-    
+
     def test_user_registration_with_invalid_email(self):
         """Test for user registration with invalid email format"""
         with self.client:
@@ -62,7 +62,7 @@ class TestAuthUserRegistration(RegisterLogin):
                 "firstname123", "lastname", "Nairobi", "Male"
             )
             self.assertEqual(response.status_code, 400)
-            self.assertIn("Name field cannot contain numbers",
+            self.assertIn("field cannot contain numbers",
                           str(response.data))
 
     def test_register_user_with_name_field_has_special_characters(self):
@@ -73,5 +73,5 @@ class TestAuthUserRegistration(RegisterLogin):
                 "firstname$$#$#$#$#", "lastname", "Nairobi", "Male"
             )
             self.assertEqual(response.status_code, 400)
-            self.assertIn("Name contains special characters",
+            self.assertIn("field contains special characters",
                           str(response.data))

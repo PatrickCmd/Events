@@ -21,7 +21,7 @@ class TestEventsCrud(CreateCategoryEvents):
                     login.data.decode()
                 )['messages']['token'][0]
             )
-            category = Categories(id=1,name="Technology", created_by=1)
+            category = Categories(id=1, name="Technology", created_by=1)
             category.save()
             response = self.create_event("Blockchain Technology, protocols",
                                          "A multi-tier blockchain system",
@@ -30,7 +30,7 @@ class TestEventsCrud(CreateCategoryEvents):
             self.assertEqual(response.status_code, 201)
             self.assertIn("New event successfully created",
                           str(response.data))
-    
+
     def test_event_creation_which_category_not_exist(self):
         '''Test event creation with non existant category'''
         with self.client:
@@ -50,12 +50,12 @@ class TestEventsCrud(CreateCategoryEvents):
             category.save()
             response = self.create_event("Blockchain Technology, protocols",
                                          "A multi-tier blockchain system",
-                                         2, 20, "Nairobi", "Science & Tech", 
+                                         2, 20, "Nairobi", "Science & Tech",
                                          100, headers)
             self.assertEqual(response.status_code, 404)
             self.assertIn("The category selected doesnot exist",
                           str(response.data))
-    
+
     def test_event_creation_already_exists(self):
         '''Test event creation which already exists'''
         with self.client:
@@ -83,7 +83,7 @@ class TestEventsCrud(CreateCategoryEvents):
             event.save()
             response = self.create_event("Blockchain Technology, protocols",
                                          "A multi-tier blockchain system",
-                                         1, 20, "Nairobi", "Science & Tech", 
+                                         1, 20, "Nairobi", "Science & Tech",
                                          100, headers)
             self.assertEqual(response.status_code, 409)
             self.assertIn("Event name already exists",
@@ -128,7 +128,7 @@ class TestEventsCrud(CreateCategoryEvents):
                           str(response.data))
             self.assertIn("Sex Education",
                           str(response.data))
-    
+
     def test_existing_event_retrieval(self):
         '''Test retrieve existing single event'''
         with self.client:
@@ -167,8 +167,8 @@ class TestEventsCrud(CreateCategoryEvents):
             self.assertIn("Blockchain Technology and protocols",
                           str(response.data))
             self.assertNotIn("Sex Education",
-                          str(response.data))
-    
+                             str(response.data))
+
     def test_existing_event_retrieval_not_existing(self):
         '''Test retrieve existing single event'''
         with self.client:
@@ -207,8 +207,8 @@ class TestEventsCrud(CreateCategoryEvents):
             self.assertIn("The event doesnot exist",
                           str(response.data))
             self.assertNotIn("Sex Education",
-                          str(response.data))
+                             str(response.data))
             self.assertNotIn("Blockchain Technology and protocols",
-                          str(response.data))
+                             str(response.data))
             self.assertNotIn("Sex Education",
-                          str(response.data))
+                             str(response.data))
