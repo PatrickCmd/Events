@@ -20,7 +20,7 @@ class UserRegistrationView(Resource):
                 "messages": {
                     "errors": {
                         "name:": [
-                            "Name field cannot contain numbers"
+                            "field cannot contain numbers"
                         ]
                     }
                 }
@@ -31,7 +31,7 @@ class UserRegistrationView(Resource):
                 "messages": {
                     "errors": {
                         "name": [
-                            "Name contains special characters"
+                            "field contains special characters"
                         ]
                     }
                 }
