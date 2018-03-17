@@ -1,11 +1,7 @@
 image: "python:3.6"
 
 services:
-  - postgres
-
-before_script:
-  - "gitlab-psql -c 'create database events;' -U postgres"
-  - "gitlab-psql -c 'create database events-test;' -U postgres"
+  - postgres:latest
 
 stages:
   - test
