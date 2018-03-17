@@ -1,0 +1,14 @@
+image: "python:3.6"
+
+services:
+  postgres
+
+test:
+  script:
+  # this configures flask application to use attached postgres database that is run on `postgres` host
+  - export DATABASE_URL=postgres://postgres:@postgres:5432/events
+  - export TEST_DATABASE_URL=postgres://postgres:@postgres:5432/events-test
+  - apt-get update -qy
+  - apt-get install -y python-dev python-pip
+  - pip install -r requirements.txt
+  - nosetests -v --with-coverage --cover-package=app
