@@ -4,8 +4,8 @@ services:
   - postgres
 
 before_script:
-  - "psql -c 'create database events;' -U postgres"
-  - "psql -c 'create database events-test;' -U postgres"
+  - "gitlab-psql -c 'create database events;' -U postgres"
+  - "gitlab-psql -c 'create database events-test;' -U postgres"
 
 stages:
   - test
