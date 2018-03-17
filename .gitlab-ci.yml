@@ -1,7 +1,7 @@
 image: "python:3.6"
 
 services:
-  postgres
+  - postgres
 
 test:
   script:
