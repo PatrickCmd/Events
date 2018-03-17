@@ -16,7 +16,7 @@ def create_auth_token(user_id, email, first_name, last_name):
         'first_name': first_name,
         'last_name': last_name
     }
-    expires = datetime.timedelta(days=65)
+    expiry_time = datetime.timedelta(days=65)
 
-    token = create_access_token(user, expires_delta=expires)
+    token = create_access_token(user, expires_delta=expiry_time)
     return token
