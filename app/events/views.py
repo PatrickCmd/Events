@@ -1,4 +1,4 @@
-from flask import request, jsonify, make_response, json
+from flask import jsonify, make_response, json
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from webargs.flaskparser import use_args
@@ -44,13 +44,13 @@ class CategoryResourceView(Resource):
                 }
             }
             return make_response(jsonify(response), 409)
-    
+
     def get(self):
         cat_schema = CategorySchema(many=True)
         categories = Categories.query.all()
         # Serialize the queryset
         category_serializer = cat_schema.dump(categories)
-        
+
         response = {
             "messages": {
                 "categories": category_serializer
@@ -104,7 +104,7 @@ class CategoryDetailView(Resource):
 
     def put(self):
         pass
-        
+
     def delete(self):
         pass
 
@@ -160,7 +160,7 @@ class EventResourceView(Resource):
                 }
             }
             return make_response(jsonify(response), 409)
-    
+
     def get(self):
         '''Retrieve all events'''
         events = Events.query.all()
@@ -173,16 +173,16 @@ class EventResourceView(Resource):
         }
         return make_response(jsonify(response), 200)
 
+
 class EventDetailView(Resource):
     '''Event Detail Resource View'''
 
     def get(self, event_id):
         event = Events.query.filter_by(id=event_id).first()
-        print(type(event))
         if event:
             event_schema = EventSchema()
             event_serializer = event_schema.dump(event)
-            
+
             response = {
                 "messages": {
                     "event": event_serializer
@@ -200,10 +200,9 @@ class EventDetailView(Resource):
                 }
             }
             return make_response(jsonify(response), 404)
-    
+
     def put(self):
         pass
-    
+
     def delete(self):
         pass
-    
