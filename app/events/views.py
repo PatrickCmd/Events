@@ -204,5 +204,25 @@ class EventDetailView(Resource):
     def put(self):
         pass
 
-    def delete(self):
-        pass
+    @jwt_required
+    def delete(self, event_id):
+        event = Events.query.filter_by(id=event_id).first()
+        if event:
+            event.delete()
+            response = {
+                "messages": {
+                    "event": f"{event.name} successfully deleted from database"
+                }
+            }
+            return make_response(jsonify(response), 200)
+        else:
+            response = {
+                "messages": {
+                    "errors": {
+                        "event": [
+                            "The event selected doesnot exist"
+                        ]
+                    }
+                }
+            }
+            return make_response(jsonify(response), 404)
