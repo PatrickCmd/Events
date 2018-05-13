@@ -5,7 +5,7 @@ def is_valid(name_string):
 
 
 # check if field contains number
-def hasNumbers(inputString):
+def has_numbers(inputString):
     return any(char.isdigit() for char in inputString)
 
 
@@ -13,7 +13,7 @@ def hasNumbers(inputString):
 def name_has_numbers(data):
     keys = ('first_name', 'last_name')
     for key in keys:
-        if hasNumbers(data[key]):
+        if has_numbers(data[key]):
             return True
 
 
